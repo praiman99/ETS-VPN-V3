@@ -1,2 +1,2 @@
 # ETS-VPN-V3
-This is a project VPN By EVSTPCSAT VPN
+This is a project VPN BY EVSTPCSAT VPN
