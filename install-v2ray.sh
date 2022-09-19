@@ -300,8 +300,6 @@ clear
 
 check_if_running_as_root
 
-check_if_tls_cert_exists
-
 init_input_config
 
 install_nginx
