@@ -25,15 +25,6 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /data/tls.pem --keypath /data/tls.key --ecc
 
-check_if_tls_cert_exists() {
-	if [ ! -e /data/tls.pem ] || [ ! -e /data/tls.key ]; then
-		echo "TLS File on /data directory does not exists!"
-		echo "Exiting..."
-		sleep 2
-		exit 1
-	fi
-}
-
 init_input_config() {
 	echo "Before start, make sure your domain has connected to CloudFlare (CF)."
 	sleep 2
