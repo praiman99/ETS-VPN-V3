@@ -286,14 +286,13 @@ get_version() {
 
 download_v2ray() {
   DOWNLOAD_LINK="https://github.com/v2fly/v2ray-core/releases/download/v4.45.0/v2ray-linux-64.zip"
-  DOWNLOAD_DGST="https://github.com/v2fly/v2ray-core/releases/download/v4.45.0/v2ray-linux-64.zip.dgst"
   echo "Downloading V2Ray archive: $DOWNLOAD_LINK"
   if ! curl -x "${PROXY}" -R -H 'Cache-Control: no-cache' -o "$ZIP_FILE" "$DOWNLOAD_LINK"; then
     echo 'error: Download failed! Please check your network or try again.'
     return 1
   fi
-  echo "Downloading verification file for V2Ray archive: $DOWNLOAD_DGST.dgst"
-  if ! curl -x "${PROXY}" -sSR -H 'Cache-Control: no-cache' -o "$ZIP_FILE.dgst" "$DOWNLOAD_DGST.dgst"; then
+  echo "Downloading verification file for V2Ray archive: $DOWNLOAD_LINK.dgst"
+  if ! curl -x "${PROXY}" -sSR -H 'Cache-Control: no-cache' -o "$ZIP_FILE.dgst" "$DOWNLOAD_LINK.dgst"; then
     echo 'error: Download failed! Please check your network or try again.'
     return 1
   fi
