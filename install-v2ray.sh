@@ -34,10 +34,8 @@ init_input_config() {
 	read wsPath
 }
 
-
 # Generate certificates
 install_cert(){
-apt-get install socat
 mkdir /root/.acme.sh
 curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh
@@ -294,15 +292,15 @@ EOF
 
 apt-get update
 
-apt-get install curl wget build-essential -y
+apt-get install curl wget build-essential socat -y
 
 clear
 
 check_if_running_as_root
 
-install_cert
-
 init_input_config
+
+install_cert
 
 install_nginx
 
