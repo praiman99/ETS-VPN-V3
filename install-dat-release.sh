@@ -19,7 +19,7 @@
 DAT_PATH=${DAT_PATH:-/usr/local/share/v2ray}
 
 DOWNLOAD_LINK_GEOIP="https://github.com/v2fly/geoip/releases/download/202208110837/geoip.dat"
-DOWNLOAD_LINK_GEOSITE="https://github.com/v2fly/domain-list-community/releases/download/20220811094515/dlc.dat"
+DOWNLOAD_LINK_GEOSITE="https://github.com/v2fly/domain-list-community/releases/dlc.dat"
 file_ip='geoip.dat'
 file_dlc='dlc.dat'
 file_site='geosite.dat'
