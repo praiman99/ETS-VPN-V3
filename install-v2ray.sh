@@ -40,7 +40,7 @@ curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 ~/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /usr/local/etc/v2ray/v2ray.crt --keypath /usr/local/etc/v2ray/vray.key --ecc
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /root/.acme.sh/tls.crt --keypath /root/.acme.sh/tls.key --ecc
 }
 
 install_nginx() {
@@ -55,8 +55,8 @@ server {
 	listen 442 ssl http2;
 	listen [::]:442 http2;
 
-	ssl_certificate /usr/local/etc/v2ray/v2ray.crt;
-	ssl_certificate_key /usr/local/etc/v2ray/v2ray.key;
+	ssl_certificate /root/.acme.sh/tls.crt;
+	ssl_certificate_key /root/.acme.sh/tls.key;
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 	ssl_ciphers HIGH:!aNULL:!MD5;
 
