@@ -43,6 +43,16 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /root/.acme.sh/tls.crt --keypath /root/.acme.sh/tls.key --ecc
 }
 
+check_if_tls_cert_exists() {
+	if [ ! -e /root/.acme.sh/tls.crt ] || [ ! -e /root/.acme.sh/tls.key ]; then
+		echo "TLS File on /root/.acme.sh/ directory does not exists!"
+		else
+		echo "Exiting..."
+		sleep 2
+		exit 1
+	fi
+}
+
 install_nginx() {
 	apt-get install nginx -y
 	
@@ -95,6 +105,7 @@ install_v2ray() {
 	bash <(curl -L https://raw.githubusercontent.com/praiman99/ETS-VPN-V3/main/install-dat-release.sh)
 
 	# Make Server Config
+  uuid=$(cat /proc/sys/kernel/random/uuid)
 	mkdir /etc/v2ray
 	cat >/etc/v2ray/config.json <<-EOF
 {
@@ -112,7 +123,7 @@ install_v2ray() {
 			"settings": {
 				"clients": [
 					{
-						"id": "a79a1bec-196c-4f34-ac2a-8842233600c5",
+						"id": "${uuid}",
 						"level": 0,
 						"alterId": 0
 					}
@@ -132,7 +143,7 @@ install_v2ray() {
 			"settings": {
 				"clients": [
 					{
-						"id": "a79a1bec-196c-4f34-ac2a-8842233600c5",
+						"id": "${uuid}",
 						"level": 0,
 						"alterId": 0
 					}
@@ -300,6 +311,8 @@ check_if_running_as_root
 init_input_config
 
 install_cert
+
+check_if_tls_cert_exists
 
 install_nginx
 
