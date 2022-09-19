@@ -23,6 +23,7 @@ init_input_config() {
 	echo -n "Email Address : "
 	read email
 
+	echo "Fill the V2Ray/Vmess Port for TLS. Don't input 443, because that will used by Web Server."
 	echo -n "V2Ray/VMess Port (TLS) : "
 	read tlsPort
 
@@ -52,8 +53,8 @@ install_nginx() {
 	#cat >test.txt <<-EOF
 	cat >/etc/nginx/sites-available/default <<-EOF
 server {
-	listen 442 ssl http2;
-	listen [::]:442 http2;
+	listen 443 ssl http2;
+	listen [::]:443 http2;
 
 	ssl_certificate /root/.acme.sh/tls.crt;
 	ssl_certificate_key /root/.acme.sh/tls.key;
