@@ -25,6 +25,10 @@ check_if_tls_cert_exists() {
 init_input_config() {
 	echo "Before start, make sure your domain has connected to CloudFlare (CF)."
 	sleep 2
+	
+	read -rp "Domain : " Domain
+	
+	read -rp "Email : " email 
 
 	echo -n "Domain Name : "
 	read domain
