@@ -105,8 +105,8 @@ install_v2ray() {
 	bash <(curl -L https://raw.githubusercontent.com/praiman99/ETS-VPN-V3/main/install-dat-release.sh)
 
 	# Make Server Config
-  uuid=$(cat /proc/sys/kernel/random/uuid)
 	mkdir /etc/v2ray
+  uuid=$(cat /proc/sys/kernel/random/uuid)
 	cat >/etc/v2ray/config.json <<-EOF
 {
 	"log": {
