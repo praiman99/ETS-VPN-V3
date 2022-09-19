@@ -17,6 +17,14 @@ check_if_running_as_root() {
 read -p "Please Enter Your Domain : " domain
 echo -e "$domain" >> /etc/domain
 
+# Generate certificates
+mkdir /root/.acme.sh
+curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+chmod +x /root/.acme.sh/acme.sh
+/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+~/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /data/tls.pem --keypath /data/tls.key --ecc
+
 check_if_tls_cert_exists() {
 	if [ ! -e /data/tls.pem ] || [ ! -e /data/tls.key ]; then
 		echo "TLS File on /data directory does not exists!"
@@ -46,14 +54,6 @@ init_input_config() {
 	echo -n "V2Ray/VMESS Websocket Path (Just alphanumeric. Don't Fill slash '/') : "
 	read wsPath
 }
-
-# Generate certificates
-mkdir /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-~/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /data/tls.pem --keypath /data/tls.key --ecc
 
 install_nginx() {
 	apt-get install nginx -y
