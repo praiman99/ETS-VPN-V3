@@ -23,7 +23,7 @@ curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 ~/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /data/tls.pem --keypath /data/tls.key --ecc
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /data/tls.crt --keypath /data/tls.key --ecc
 
 init_input_config() {
 	echo "Before start, make sure your domain has connected to CloudFlare (CF)."
