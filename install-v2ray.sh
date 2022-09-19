@@ -221,7 +221,7 @@ EOF
 	systemctl disable v2ray
 
 	# Create new v2ray starter script
-	cat >/etc/systemd/system/v2ray.service <<-EOF
+	cat >/etc/systemd/system/stv2ray.service <<-EOF
 [Unit]
 Description=V2Ray Service
 Documentation=https://www.v2fly.org/
@@ -242,8 +242,8 @@ EOF
 
 	# Reload daemon
 	systemctl daemon-reload
-	systemctl enable v2ray
-	systemctl start v2ray
+	systemctl enable stv2ray
+	systemctl start stv2ray
 
 	# Create client config
 	cat >/etc/v2ray/client-tls.json <<-EOF
