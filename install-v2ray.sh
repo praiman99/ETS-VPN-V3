@@ -241,8 +241,8 @@ EOF
 
 	# Reload daemon
 	systemctl daemon-reload
-	systemctl enable stv2ray
-	systemctl start stv2ray
+	systemctl enable v2ray
+	systemctl start v2ray
 
 	# Create client config
 	cat >/etc/v2ray/client-tls.json <<-EOF
