@@ -13,6 +13,10 @@ check_if_running_as_root() {
   fi
 }
 
+# Input Domain 
+read -p "Please Enter Your Domain : " domain
+echo -e "$domain" >> /etc/domain
+
 check_if_tls_cert_exists() {
 	if [ ! -e /data/tls.pem ] || [ ! -e /data/tls.key ]; then
 		echo "TLS File on /data directory does not exists!"
@@ -26,15 +30,11 @@ init_input_config() {
 	echo "Before start, make sure your domain has connected to CloudFlare (CF)."
 	sleep 2
 	
-	read -rp "Domain : " Domain
-	
-	read -rp "Email : " email 
-
 	echo -n "Domain Name : "
-	read domain
+	read $domain
 
 	echo -n "Email Address : "
-	read email
+	read $email
 
 	echo "Fill the V2Ray/Vmess Port for TLS. Don't input 443, because that will used by Web Server."
 	echo -n "V2Ray/VMess Port (TLS) : "
@@ -53,7 +53,7 @@ curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 ~/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /data/tls.crt --keypath /data/tls.key --ecc
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /data/tls.pem --keypath /data/tls.key --ecc
 
 install_nginx() {
 	apt-get install nginx -y
