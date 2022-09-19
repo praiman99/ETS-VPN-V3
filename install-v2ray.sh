@@ -43,16 +43,6 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /root/.acme.sh/tls.crt --keypath /root/.acme.sh/tls.key --ecc
 }
 
-check_if_tls_cert_exists() {
-	if [ ! -e /root/.acme.sh/tls.crt ] || [ ! -e /root/.acme.sh/tls.key ]; then
-		echo "TLS File on /root/.acme.sh/ directory does not exists!"
-		else
-		echo "Exiting..."
-		sleep 2
-		exit 1
-	fi
-}
-
 install_nginx() {
 	apt-get install nginx -y
 	
@@ -311,8 +301,6 @@ check_if_running_as_root
 init_input_config
 
 install_cert
-
-check_if_tls_cert_exists
 
 install_nginx
 
