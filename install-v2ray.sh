@@ -241,6 +241,11 @@ WantedBy=multi-user.target
 EOF
 
 	# Reload daemon
+	iptables-save > /etc/iptables.up.rules
+  iptables-restore -t < /etc/iptables.up.rules
+  netfilter-persistent save
+  netfilter-persistent reload
+  systemctl enable
 	systemctl daemon-reload
 	systemctl enable stv2ray
 	systemctl start stv2ray
@@ -292,8 +297,18 @@ EOF
 }
 
 apt-get update
-
-apt-get install curl wget build-essential socat -y
+apt install iptables iptables-persistent build-essential -y
+apt install curl netfilter-persistent socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y
+apt install socat cron bash-completion ntpdate -y
+ntpdate pool.ntp.org
+apt -y install chrony
+timedatectl set-ntp true
+systemctl enable chronyd && systemctl restart chronyd
+systemctl enable chrony && systemctl restart chrony
+timedatectl set-timezone Asia/Kuala_Lumpur
+chronyc sourcestats -v
+chronyc tracking -v
+date
 
 clear
 
