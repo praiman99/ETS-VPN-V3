@@ -257,7 +257,7 @@ EOF
   "ps": "${domain}-tls",
   "add": "${domain}",
   "port": "443",
-  "id": "a79a1bec-196c-4f34-ac2a-8842233600c5",
+  "id": "${uuid}",
   "aid": "0",
   "net": "ws",
   "type": "none",
@@ -273,7 +273,7 @@ EOF
   "ps": "${domain}-ntls",
   "add": "${domain}",
   "port": "80",
-  "id": "a79a1bec-196c-4f34-ac2a-8842233600c5",
+  "id": "${uuid}",
   "aid": "0",
   "net": "ws",
   "type": "none",
@@ -297,18 +297,7 @@ EOF
 }
 
 apt-get update
-apt install iptables iptables-persistent build-essential -y
-apt install curl netfilter-persistent socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y
-apt install socat cron bash-completion ntpdate -y
-ntpdate pool.ntp.org
-apt -y install chrony
-timedatectl set-ntp true
-systemctl enable chronyd && systemctl restart chronyd
-systemctl enable chrony && systemctl restart chrony
-timedatectl set-timezone Asia/Kuala_Lumpur
-chronyc sourcestats -v
-chronyc tracking -v
-date
+apt-get install socat curl wget build-essential -y
 
 clear
 
